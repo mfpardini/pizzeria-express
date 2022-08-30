@@ -19,6 +19,7 @@ services:
   adminer:
     container_name: adminer_mysql
     image: adminer
+    restart: always
     ports:
       - 8080:8080
     networks:

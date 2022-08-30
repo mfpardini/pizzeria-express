@@ -1,6 +1,6 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { User } from "./entity/User"
+import { SnakeNamingStrategy } from "typeorm-naming-strategies"
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -11,8 +11,9 @@ export const AppDataSource = new DataSource({
     database: "db_pizzeria",
     synchronize: true,
     logging: false,
-    entities: [User],
-    migrations: [],
+    entities: [__dirname + "/entity/*{.js,.ts}"],
+    migrations: [__dirname + "/migration/*{.js,.ts}"],
     subscribers: [],
-    insecureAuth: true,
+    // dropSchema: true,
+    namingStrategy: new SnakeNamingStrategy(),
 })
