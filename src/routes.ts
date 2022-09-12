@@ -1,4 +1,6 @@
 import { Request, Response, Router } from "express";
+import { GetAllOrdersController } from "./controllers/order/GetAllOrdersController";
+import { GetOrderByIdController } from "./controllers/order/GetOrderByIdController";
 
 const router = Router();
 
@@ -8,13 +10,9 @@ const router = Router();
 /api/pizzas (list of pizzas; see './backend/example-pizzas.json')
 */
 
-router.get('/orders', (req: Request, res: Response) => {
-    res.send('A LIST OF ORDERS')
-});
+router.get('/orders', new GetAllOrdersController().handle);
 
-router.get('/orders/:id', (req: Request, res: Response) => {
-    res.send(`DETAIL OF ORDER: ${req.params.id}`)
-});
+router.get('/orders/:id', new GetOrderByIdController().handle);
 
 router.get('/pizzas', (req: Request, res: Response) => {
     res.send('A LIST OF PIZZAS')

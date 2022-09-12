@@ -1,4 +1,4 @@
-import { AppDataSource } from "./data-source";
+import { AppDataSource } from "./database/data-source";
 import { Client } from "./entity/Client";
 import { Ingredient } from "./entity/Ingredient";
 import { Item } from "./entity/Item";
@@ -54,6 +54,7 @@ AppDataSource.initialize()
     const ingredients = [...new Set(ingreds)];
     
     const ingredientPromisses = ingredients.map(async (ing) => {
+      // const ingredient = await Ingredient.create({name: ing}).save();
       const ingredient = new Ingredient();
       ingredient.name = ing;
       await ingredentRepo.save(ingredient);
@@ -166,7 +167,7 @@ AppDataSource.initialize()
       await orderRepo.save(order3);
       
       const orderItem3 = new OrderItem();
-      orderItem3.order = order1;
+      orderItem3.order = order3;
       orderItem3.item = await itemRepo.findOneByOrFail({id:1});
       orderItem3.quantity = 2;
       await orderItemRepo.save(orderItem3);
