@@ -1,4 +1,5 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+import { GetAllPizzasController } from "./controllers/item/GetAllPizzasController";
 import { GetAllOrdersController } from "./controllers/order/GetAllOrdersController";
 import { GetOrderByIdController } from "./controllers/order/GetOrderByIdController";
 
@@ -14,8 +15,6 @@ router.get('/orders', new GetAllOrdersController().handle);
 
 router.get('/orders/:id', new GetOrderByIdController().handle);
 
-router.get('/pizzas', (req: Request, res: Response) => {
-    res.send('A LIST OF PIZZAS')
-});
+router.get('/pizzas', new GetAllPizzasController().handle);
 
 export default router;
